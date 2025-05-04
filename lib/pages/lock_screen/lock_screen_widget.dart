@@ -57,12 +57,12 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
             children: [
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
-                height: MediaQuery.sizeOf(context).height * 0.07,
+                height: MediaQuery.sizeOf(context).height * 0.15,
                 decoration: BoxDecoration(),
               ),
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
-                height: MediaQuery.sizeOf(context).height * 0.55,
+                height: MediaQuery.sizeOf(context).height * 0.35,
                 decoration: BoxDecoration(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -74,43 +74,13 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
                             15.0, 15.0, 15.0, 15.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://picsum.photos/seed/827/600',
-                            width: MediaQuery.sizeOf(context).width * 0.7,
-                            height: MediaQuery.sizeOf(context).height * 0.3,
+                          child: Image.asset(
+                            'assets/images/zerovaultLogo2.JPG',
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: MediaQuery.sizeOf(context).height * 0.15,
                             fit: BoxFit.cover,
                             alignment: Alignment(0.0, 0.0),
                           ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
-                        child: Text(
-                          'ZeroVault',
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                font: GoogleFonts.montserrat(
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .displaySmall
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .displaySmall
-                                      .fontStyle,
-                                ),
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .fontStyle,
-                              ),
                         ),
                       ),
                     ),
@@ -231,7 +201,7 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
                           buttonSize: 100.0,
                           icon: Icon(
                             Icons.login_rounded,
-                            color: Colors.white,
+                            color: Color(0xFF0077FF),
                             size: 50.0,
                           ),
                           onPressed: () {
