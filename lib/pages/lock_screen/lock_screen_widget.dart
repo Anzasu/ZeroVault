@@ -86,31 +86,27 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
                     ),
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                        child: Text(
-                          'Zero tracking. Zero cloud. 100% privacy',
-                          style:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    font: GoogleFonts.montserrat(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Color(0xFFE5E7EB),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                        ),
+                      child: Text(
+                        'Zero tracking. Zero cloud. 100% privacy',
+                        style: FlutterFlowTheme.of(context).titleSmall.override(
+                              font: GoogleFonts.montserrat(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                              color: Color(0xFFE5E7EB),
+                              fontSize: 17.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .fontStyle,
+                            ),
                       ),
                     ),
                   ],
@@ -173,8 +169,8 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
                           ),
                           shape: PinCodeFieldShape.box,
                           activeColor: Color(0xFF0077FF),
-                          inactiveColor: Colors.white,
-                          selectedColor: Color(0xFFF59E0B),
+                          inactiveColor: Color(0xFF656565),
+                          selectedColor: Colors.white,
                         ),
                         controller: _model.pinCodeController,
                         onChanged: (_) {},
