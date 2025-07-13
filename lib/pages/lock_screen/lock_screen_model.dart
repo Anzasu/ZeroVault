@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'lock_screen_widget.dart' show LockScreenWidget;
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
