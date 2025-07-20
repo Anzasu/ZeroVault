@@ -1,7 +1,3 @@
 # ZeroVault
 
-A new Flutter project.
-
-## Getting Started
-
-FlutterFlow projects are built to run on the Flutter _stable_ release.
+Password and mail subscription manager with a focus on privacy. **No cloud storage. No tracking. 100% privacy.**
