@@ -56,6 +56,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: VaultWidget.routeName,
           path: VaultWidget.routePath,
           builder: (context, params) => VaultWidget(),
+        ),
+        FFRoute(
+          name: AddPassPageWidget.routeName,
+          path: AddPassPageWidget.routePath,
+          builder: (context, params) => AddPassPageWidget(),
+        ),
+        FFRoute(
+          name: EditSubPageWidget.routeName,
+          path: EditSubPageWidget.routePath,
+          builder: (context, params) => EditSubPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
