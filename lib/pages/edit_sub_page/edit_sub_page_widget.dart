@@ -1,3 +1,5 @@
+import 'package:zero_vault/pages/vault/vault_widget.dart';
+
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -100,12 +102,12 @@ class _EditSubPageWidgetState extends State<EditSubPageWidget> {
                     borderWidth: 1.0,
                     buttonSize: 44.0,
                     icon: Icon(
-                      Icons.settings_outlined,
+                      Icons.arrow_back_outlined,
                       color: Colors.white,
                       size: 30.0,
                     ),
-                    onPressed: () {
-                      print('IconButton pressed ...');
+                    onPressed: () async {
+                      context.pushNamed(VaultWidget.routeName);
                     },
                   ),
                 ),

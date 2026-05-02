@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:zero_vault/pages/edit_pass_page/edit_pass_page_widget.dart';
+import 'package:zero_vault/pages/see_pass_page/see_pass_page_widget.dart';
 
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -66,6 +68,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: EditSubPageWidget.routeName,
           path: EditSubPageWidget.routePath,
           builder: (context, params) => EditSubPageWidget(),
+        ),
+        FFRoute(
+         name: SeePassPageWidget.routeName,
+         path: SeePassPageWidget.routePath,
+         builder: (context, params) => SeePassPageWidget(),
+        ),
+        FFRoute(
+         name: EditPassPageWidget.routeName,
+         path: EditPassPageWidget.routePath,
+         builder: (context, params) => EditPassPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
