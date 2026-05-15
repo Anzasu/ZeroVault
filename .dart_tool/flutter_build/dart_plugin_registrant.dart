@@ -21,6 +21,7 @@ import 'package:path_provider_foundation/path_provider_foundation.dart' as path_
 import 'package:shared_preferences_foundation/shared_preferences_foundation.dart' as shared_preferences_foundation;
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:url_launcher_macos/url_launcher_macos.dart' as url_launcher_macos;
+import 'package:flutter_secure_storage_windows/flutter_secure_storage_windows.dart' as flutter_secure_storage_windows;
 import 'package:path_provider_windows/path_provider_windows.dart' as path_provider_windows;
 import 'package:shared_preferences_windows/shared_preferences_windows.dart' as shared_preferences_windows;
 import 'package:url_launcher_windows/url_launcher_windows.dart' as url_launcher_windows;
@@ -170,6 +171,15 @@ class _PluginRegistrant {
       }
 
     } else if (Platform.isWindows) {
+      try {
+        flutter_secure_storage_windows.FlutterSecureStorageWindows.registerWith();
+      } catch (err) {
+        print(
+          '`flutter_secure_storage_windows` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
       try {
         path_provider_windows.PathProviderWindows.registerWith();
       } catch (err) {

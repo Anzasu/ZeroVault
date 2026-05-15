@@ -18,6 +18,9 @@ build/
 **/android/.gradle
 **/android/captures/
 **/android/app/google-services.json
+**/android/key.properties
+**/android/*.jks
+**/android/*.keystore
 
 # iOS specific
 **/ios/Pods/
@@ -28,3 +31,14 @@ build/
 
 # OS/System files
 .DS_Store
+
+# --- Additional security / sensitive ---
+# Environment & secret files
+.env
+*.env
+*.secret
+secrets/
+
+# Generated files (optional – uncomment if you prefer to keep them out of version control)
+# *.g.dart
+# *.freezed.dart
