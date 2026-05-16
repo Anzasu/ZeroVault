@@ -13,6 +13,7 @@
         "cached_network_image_platform_interface",
         "cached_network_image_web",
         "collection",
+        "cryptography",
         "cupertino_icons",
         "dropdown_button2",
         "encrypt",
@@ -469,6 +470,17 @@
       ]
     },
     {
+      "name": "cryptography",
+      "version": "2.9.0",
+      "dependencies": [
+        "collection",
+        "crypto",
+        "ffi",
+        "meta",
+        "typed_data"
+      ]
+    },
+    {
       "name": "collection",
       "version": "1.19.1",
       "dependencies": []
@@ -805,6 +817,13 @@
       "name": "args",
       "version": "2.7.0",
       "dependencies": []
+    },
+    {
+      "name": "typed_data",
+      "version": "1.4.0",
+      "dependencies": [
+        "collection"
+      ]
     },
     {
       "name": "octo_image",
@@ -1150,13 +1169,6 @@
       "name": "characters",
       "version": "1.4.1",
       "dependencies": []
-    },
-    {
-      "name": "typed_data",
-      "version": "1.4.0",
-      "dependencies": [
-        "collection"
-      ]
     },
     {
       "name": "string_scanner",

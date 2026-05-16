@@ -1,3 +1,9 @@
+import 'package:zero_vault/backend/providers/auth_provider.dart';
+import 'package:zero_vault/backend/providers/vault_provider.dart';
+import 'package:zero_vault/backend/services/auth_service.dart';
+import 'package:zero_vault/backend/services/master_key_provider.dart';
+import 'package:zero_vault/frontend/pages/lock_screen/pin_setup_page.dart';
+
 import '../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
@@ -27,12 +33,32 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void initState() {
-    super.initState();
-    _model = createModel(context, () => LockScreenModel());
+void initState() {
+  super.initState();
+  _model = createModel(context, () => LockScreenModel());
+  _model.pinCodeFocusNode ??= FocusNode();
+//fi no pin the redirect to Onboarding
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    final auth = context.read<AuthProvider>();
 
-    _model.pinCodeFocusNode ??= FocusNode();
-  }
+    /**
+     * TODO:
+     * Before redirected to Pin setup the lock screen is displayed for a second
+     * --> add a loading page or smth that covers that up
+     * Also everytime the lock or pin page opens the keyboard flashes open and closes
+     * --> stop that. keybaord only opens when clicked on the field
+     * 
+     * ALSO: Add Splash PAge with Zero Vault Logo and Zero Vault App Icon
+     * When I save a new password I get redirected to the lock screen because that was the last page on the stack 
+     * --> it has to go to Vault
+     */
+    if (!auth.hasPin) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const PinSetupPage()),
+      );
+    }
+  });
+}
 
   @override
   void dispose() {
@@ -154,7 +180,7 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
                         enablePinAutofill: false,
                         errorTextSpace: 16.0,
                         showCursor: true,
-                        cursorColor: Color(0xFF0077FF),
+                        cursorColor: FlutterFlowTheme.of(context).primary,
                         obscureText: true,
                         obscuringCharacter: '*',
                         hintCharacter: '●',
@@ -170,7 +196,7 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
                             topRight: Radius.circular(12.0),
                           ),
                           shape: PinCodeFieldShape.box,
-                          activeColor: Color(0xFF0077FF),
+                          activeColor: FlutterFlowTheme.of(context).primary,
                           inactiveColor: Color(0xFF656565),
                           selectedColor: Colors.white,
                         ),
@@ -203,8 +229,34 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
                             size: 50.0,
                           ),
                           onPressed: () async {
-                            context.pushNamed(VaultWidget.routeName);
+                            final pin = _model.pinCodeController.text;
+                            if (pin.length != 6) return;
+
+                            final authService = AuthService();
+                            final masterKey = await authService.verifyPin(pin);
+                            if (masterKey == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Wrong PIN')),
+                              );
+                              return;
+                            }
+
+                            MasterKeyProvider.setKey(masterKey);
+                            final vault = VaultProvider();
+                            await vault.init(masterKey);
+                            context.read<AuthProvider>().unlock();
+
+                            if (mounted) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(builder: (_) => ChangeNotifierProvider.value(
+                                  value: vault,
+                                  child: const VaultWidget(),
+                                )),
+                                (route) => false,
+                              );
+                            }
                           },
+
                         ),
                       ),
                     ),
@@ -218,3 +270,5 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
     );
   }
 }
+
+

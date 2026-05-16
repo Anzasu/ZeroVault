@@ -662,7 +662,7 @@ Widget build(BuildContext context) {
                                                                       TextButton(onPressed: () async {
                                                                         if (mounted){
                                                                           Navigator.of(context).pop();
-                                                                          await context.read<VaultProvider>().deleteCredential(item['id'] as int);
+                                                                          await context.read<VaultProvider>().deleteCredential(id: item['id']);
                                                                         }
                                                                       }, child: const Text('Yes'),)
                                                                     ],
@@ -1140,7 +1140,7 @@ Widget build(BuildContext context) {
                                                                       TextButton(onPressed: () async {
                                                                         if (mounted){
                                                                           Navigator.of(context).pop();
-                                                                          await context.read<VaultProvider>().deleteSubscription(item['id'] as int);
+                                                                          await context.read<VaultProvider>().deleteSubscription(id: item['id']);
                                                                         }
                                                                       }, child: const Text('Yes'),)
                                                                     ],

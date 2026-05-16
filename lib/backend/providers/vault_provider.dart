@@ -4,7 +4,8 @@ import 'package:zero_vault/backend/services/encryp_service.dart';
 import 'package:zero_vault/backend/services/master_key_provider.dart';
 
 class VaultProvider extends ChangeNotifier {
-  late VaultRepo _repository;
+  VaultRepo? _repository;
+  bool _isInitialised = false;
 
   List<Map<String, dynamic>> _credentials = [];
   List<Map<String, dynamic>> _subscriptions = [];
@@ -12,65 +13,63 @@ class VaultProvider extends ChangeNotifier {
   List<Map<String, dynamic>> get credentials => _credentials;
   List<Map<String, dynamic>> get subscriptions => _subscriptions;
 
-  String _credSearchQuery = '';
-  String _subSearchQuery = '';
+  String _credentialSearch = '';
+  String _subscriptionSearch = '';
   String _credentialSort = 'title ASC';
   String _subscriptionSort = 'newsletter_name ASC';
 
-  // ---- Initialization ------------------------------------------------
-  Future<void> init() async {
-    final masterKey = await MasterKeyProvider.key;
-    _repository = VaultRepo(EncryptionService(masterKey));
+  // ---- Initialisation (called after unlock) ----
+  Future<void> init(String masterKeyHex) async {
+    if (_isInitialised) return;
+    _repository = VaultRepo(EncryptionService(masterKeyHex));
+    await _loadAll();
+    _isInitialised = true;
+    notifyListeners();
+  }
+
+  Future<void> _loadAll() async {
+    if (_repository == null) return;
+    _credentials = await _repository!.getAllCredentials(
+      searchQuery: _credentialSearch.isNotEmpty ? _credentialSearch : null,
+      sortBy: _credentialSort,
+    );
+    _subscriptions = await _repository!.getAllSubscriptions(
+      searchQuery: _subscriptionSearch.isNotEmpty ? _subscriptionSearch : null,
+      sortBy: _subscriptionSort,
+    );
+    notifyListeners();
+  }
+
+  // ---- Refresh (called after changes) ----
+  Future<void> refresh() => _loadAll();
+
+  // ---- Search / Sort ----
+  void setCredentialSearch(String q) { _credentialSearch = q; _loadAll(); }
+  void setSubscriptionSearch(String q) { _subscriptionSearch = q; _loadAll(); }
+  // ... other sort methods ...
+
+ 
+
+  // ---- Credentials CRUD ---------------------------------------------
+  Future<void> addCredential(
+    {required String title, 
+    required String usernameOrEmail, 
+    required String password, 
+    String? notes}) async {
+    if (_repository == null) return;
+    await _repository!.insertCredential(title: title, usernameOrEmail: usernameOrEmail, password: password, notes: notes);
     await refresh();
   }
 
-  // ---- Refresh all lists from DB ------------------------------------
-  Future<void> refresh() async {
-     _credentials = await _repository.getAllCredentials(
-    searchQuery: _credSearchQuery.isNotEmpty ? _credSearchQuery : null,
-    sortBy: _credentialSort,
-  );
-  _subscriptions = await _repository.getAllSubscriptions(
-    searchQuery: _subSearchQuery.isNotEmpty ? _subSearchQuery : null,
-    sortBy: _subscriptionSort,
-  );
-  notifyListeners();
-  }
-
-  // ---- Search ------------------------------------------------
-  void setCredentialSearch(String query) {
-  _credSearchQuery = query;
-  refresh();   // or a dedicated refreshCredentials
-  }
-
-  void setSubscriptionSearch(String query) {
-  _subSearchQuery = query;
-  refresh();
-}
-
-  // ---- Credentials CRUD ---------------------------------------------
-  Future<void> addCredential({
+  Future<void> updateCredential(int id, {
     required String title,
     required String usernameOrEmail,
     required String password,
     String? notes,
   }) async {
-    await _repository.insertCredential(
-      title: title,
-      usernameOrEmail: usernameOrEmail,
-      password: password,
-      notes: notes,
-    );
-    await refresh();
-  }
+        if (_repository == null) return;
 
-  Future<void> updateCredential(int id, {
-    String? title,
-    String? usernameOrEmail,
-    String? password,
-    String? notes,
-  }) async {
-    await _repository.updateCredential(id,
+    await _repository!.updateCredential(id,
       title: title,
       usernameOrEmail: usernameOrEmail,
       password: password,
@@ -80,8 +79,10 @@ class VaultProvider extends ChangeNotifier {
     await refresh();
   }
 
-  Future<void> deleteCredential(int id) async {
-    await _repository.deleteCredential(id);
+  Future<void> deleteCredential({required int id}) async {
+        if (_repository == null) return;
+
+    await _repository!.deleteCredential(id);
     await refresh();
   }
 
@@ -91,7 +92,7 @@ class VaultProvider extends ChangeNotifier {
     required String email,
     String? frequency,
   }) async {
-    await _repository.insertSubscription(
+    await _repository!.insertSubscription(
       newsletterName: newsletterName,
       email: email,
       frequency: frequency,
@@ -100,11 +101,11 @@ class VaultProvider extends ChangeNotifier {
   }
 
   Future<void> updateSubscription(int id, {
-    String? newsletterName,
-    String? email,
+    required String newsletterName,
+    required String email,
     String? frequency,
   }) async {
-    await _repository.updateSubscription(id,
+    await _repository!.updateSubscription(id,
       newsletterName: newsletterName,
       email: email,
       frequency: frequency,
@@ -112,8 +113,8 @@ class VaultProvider extends ChangeNotifier {
     await refresh();
   }
 
-  Future<void> deleteSubscription(int id) async {
-    await _repository.deleteSubscription(id);
+  Future<void> deleteSubscription({required int id}) async {
+    await _repository!.deleteSubscription(id);
     await refresh();
   }
 

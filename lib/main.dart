@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:provider/provider.dart';
+import 'package:zero_vault/backend/providers/auth_provider.dart';
 import 'package:zero_vault/backend/providers/vault_provider.dart';
 import 'package:zero_vault/backend/services/db_helper.dart';
-import 'package:zero_vault/backend/services/master_key_provider.dart';
 import 'frontend/flutter_flow/flutter_flow_theme.dart';
 import 'frontend/flutter_flow/flutter_flow_util.dart';
 import 'frontend/flutter_flow/nav/nav.dart';
@@ -21,13 +21,20 @@ void main() async {
 
   await DBHelper.database;
 
-  await MasterKeyProvider.key; 
-  final vaultProvider = VaultProvider();
-  await vaultProvider.init(); 
+  final authProvider = AuthProvider();
+  await authProvider.initialize();
+
+    final vaultProvider = VaultProvider();
+
 
   runApp(
-    ChangeNotifierProvider.value(value: vaultProvider,
-    child: MyApp(),)
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: authProvider),
+        ChangeNotifierProvider.value(value: vaultProvider),
+      ],
+      child: MyApp(),
+    ),
   );
 }
 
