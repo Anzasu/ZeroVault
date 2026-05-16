@@ -76,14 +76,14 @@ Widget build(BuildContext context) {
       backgroundColor: Color(0xFF121212),
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.sizeOf(context).height * 0.09),
+        preferredSize: Size.fromHeight(MediaQuery.sizeOf(context).height * 0.1),
         child: AppBar(
           backgroundColor: Color(0xFF121212),
           automaticallyImplyLeading: false,
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10.0, 36.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
               child: Text(
                 'Vault',
                 style: FlutterFlowTheme.of(context).displaySmall.override(
@@ -108,7 +108,7 @@ Widget build(BuildContext context) {
             ),
           ),
           actions: [
-            Align(
+            /**Align(
               alignment: AlignmentDirectional(0.0, 0.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(80.0, 36.0, 78.0, 0.0),
@@ -127,7 +127,7 @@ Widget build(BuildContext context) {
                   },
                 ),
               ),
-            ),
+            ),*/
           ],
           centerTitle: false,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.1,
@@ -206,7 +206,7 @@ Widget build(BuildContext context) {
                               ),
                             ),
                             Tab(
-                              text: 'Newsletters & \nSubscriptions',
+                              text: 'Email Subscriptions',
                               icon: Icon(
                                 Icons.calendar_month_outlined,
                               ),
@@ -645,7 +645,7 @@ Widget build(BuildContext context) {
                                                                   .accent1,
                                                               icon: Icon(
                                                                 Icons
-                                                                    .delete_forever,
+                                                                    .delete_outline_rounded,
                                                                 color: FlutterFlowTheme.of(context).tertiary,
                                                                 size: 20.0,
                                                               ),
@@ -1123,7 +1123,7 @@ Widget build(BuildContext context) {
                                                                   .accent1,
                                                               icon: Icon(
                                                                 Icons
-                                                                    .delete_forever,
+                                                                    .delete_outline,
                                                                 color: FlutterFlowTheme.of(context).tertiary,
                                                                 size: 20.0,
                                                               ),
