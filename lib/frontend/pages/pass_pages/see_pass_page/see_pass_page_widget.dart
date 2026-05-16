@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';         
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';         
 import 'package:provider/provider.dart';
 import 'package:zero_vault/backend/providers/vault_provider.dart';
-import '../../../flutter_flow/flutter_flow_theme.dart';   
+import 'package:zero_vault/frontend/flutter_flow/flutter_flow_theme.dart';
 import '../../../flutter_flow/flutter_flow_icon_button.dart';
-import 'package:go_router/go_router.dart';
 
 class SeePassPageWidget extends StatefulWidget {
   final int credentialId;
@@ -28,7 +28,6 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
   }
 
   Future<void> _loadData() async {
-    // Step 4: edge case – no valid ID was passed
     if (widget.credentialId < 0) {
       setState(() {
         _loading = false;
@@ -53,35 +52,51 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // Consistent dark theme like add_pass_page
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: Color(0xFF121212),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF121212),
+        backgroundColor: Color(0xFF121212),
         automaticallyImplyLeading: false,
-        title: const Align(
-          alignment: AlignmentDirectional(0.0, 0.0),
+        title: Align(
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 30.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 30.0, 0.0),
             child: Text(
-              'View Password',
-              style: TextStyle(color: Colors.white, fontSize: 22.0),
-            ),
+                  'View password',
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        font: GoogleFonts.montserrat(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .fontWeight,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .fontStyle,
+                        ),
+                        color: Colors.white,
+                        fontSize: 22.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FlutterFlowTheme.of(context)
+                            .displaySmall
+                            .fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).displaySmall.fontStyle,
+                      ),
+                ),
           ),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 30.0, 30.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(50.0, 29.0, 30.0, 0.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 20.0,
               buttonSize: 44.0,
-              icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30.0),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 30.0),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
         ],
-        toolbarHeight: MediaQuery.sizeOf(context).height * 0.09,
+        toolbarHeight: MediaQuery.sizeOf(context).height * 0.1,
         elevation: 0.0,
       ),
       body: _loading
@@ -89,31 +104,32 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
           : _credential == null
               ? const Center(child: Text('Credential not found', style: TextStyle(color: Colors.white)))
               : SafeArea(
-                  top: true,
-                  child: Center(
+                  top: false,
+                  child: Align(
+                    alignment: Alignment.topCenter,
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 17.0),
                       child: Container(
                         constraints: const BoxConstraints(maxWidth: 500),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            const SizedBox(height: 25),
+                            const SizedBox(height: 40),
                             // Title
                             _buildLabel('Website or app'),
                             const SizedBox(height: 10),
                             _buildCopyRow(_credential!['title']),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 50),
                             // Email/username
                             _buildLabel('Email or username'),
                             const SizedBox(height: 10),
                             _buildCopyRow(_credential!['username_or_email']),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 50),
                             // Password
                             _buildLabel('Password'),
                             const SizedBox(height: 10),
                             _buildCopyRow(_credential!['password']),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 50),
                             // Notes
                             _buildLabel('Notes'),
                             const SizedBox(height: 10),
@@ -121,7 +137,6 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
                               _credential!['notes'] ?? 'No notes',
                               showIfEmpty: true,
                             ),
-                            const SizedBox(height: 42),
                           ],
                         ),
                       ),
@@ -133,12 +148,24 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
 
   Widget _buildLabel(String text) {
     return Text(
-      text,
-      style: const TextStyle(
-        color: Color(0xFF0077FF),   // same as add_pass_page label color
-        fontSize: 17.0,
-      ),
-    );
+                  text,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        font: GoogleFonts.inter(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        color: FlutterFlowTheme.of(context).primary,
+                        fontSize: 17.0,
+                        letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
+                );
   }
 
   Widget _buildCopyRow(String text, {bool showIfEmpty = false}) {
@@ -154,18 +181,34 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
             decoration: BoxDecoration(
-              color: const Color(0xFF1F2937),   // dark container
+              color: FlutterFlowTheme.of(context).secondaryBackground,  
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Text(
               text,
-              style: const TextStyle(color: Colors.white, fontSize: 15),
+              style: FlutterFlowTheme.of(context).labelMedium.override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                              ),
             ),
           ),
         ),
         const SizedBox(width: 8),
         IconButton(
-          icon: const Icon(Icons.copy, color: Color(0xFF0077FF)),
+          icon: Icon(Icons.copy, color: FlutterFlowTheme.of(context).primary),
           onPressed: () => _copyToClipboard(text),
         ),
       ],

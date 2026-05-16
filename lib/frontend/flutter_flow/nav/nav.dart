@@ -72,20 +72,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SeePassPageWidget.routeName,
           path: SeePassPageWidget.routePath,
-          builder:  (context, params) {
-            final extra = params.state.extra;
-            final id = extra is int ? extra : -1;
+          builder: (context, params) {
+            final idStr = params.state.uri.queryParameters['id'];
+            final id = idStr != null ? int.tryParse(idStr) ?? -1 : -1;
             return SeePassPageWidget(credentialId: id);
           },
         ),
         FFRoute(
-         name: EditPassPageWidget.routeName,
-         path: EditPassPageWidget.routePath,
-         builder:  (context, params) {
-            final extra = params.state.extra;
-            final id = extra is int ? extra : -1;
-            return EditPassPageWidget(credentialId: id);
-          },        )
+          name: EditPassPageWidget.routeName,
+          path: EditPassPageWidget.routePath,
+          builder: (context, params) {
+          final extra = GoRouterState.of(context).extra;
+          final id = extra is int ? extra : -1;
+          return EditPassPageWidget(credentialId: id);
+            },
+        ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

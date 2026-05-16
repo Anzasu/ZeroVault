@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'vault_model.dart';
 export 'vault_model.dart';
+import 'package:go_router/go_router.dart';
 
 class VaultWidget extends StatefulWidget {
   const VaultWidget({super.key});
@@ -618,12 +619,11 @@ Widget build(BuildContext context) {
                                                                 size: 20.0,
                                                               ),
                                                               onPressed: () {
-                                                                Navigator.pushNamed(
-                                                                 context,
-                                                                 SeePassPageWidget.routeName,
-                                                                arguments: item['id'] as int,      
-                                                                );
-                                                                },
+                                                                final id = item['id'] as int;
+                                                                GoRouter.of(context).push('${SeePassPageWidget.routePath}?id=$id');
+                                                                context.read<VaultProvider>().refresh();
+
+                                                              },
                                                             ),
                                                             FlutterFlowIconButton(
                                                               borderRadius:

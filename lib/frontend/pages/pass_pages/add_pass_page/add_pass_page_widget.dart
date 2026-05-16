@@ -96,27 +96,16 @@ class _AddPassPageWidgetState extends State<AddPassPageWidget> {
               ),
             ),
             actions: [
-              Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 30.0, 30.0, 0.0),
-                  child: FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 20.0,
-                    borderWidth: 1.0,
-                    buttonSize: 44.0,
-                    icon: Icon(
-                      Icons.settings_outlined,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                    onPressed: () {
-                      print('IconButton pressed ...');
-                    },
-                  ),
-                ),
-              ),
+              Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 30.0, 30.0, 0.0),
+            child: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 20.0,
+              buttonSize: 44.0,
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 30.0),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
             ],
             centerTitle: false,
             toolbarHeight: MediaQuery.sizeOf(context).height * 0.09,
