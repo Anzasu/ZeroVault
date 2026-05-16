@@ -336,10 +336,11 @@ Widget build(BuildContext context) {
                                                           0.0, 0.0),
                                                   // -------------------------------------------------- PASSWORD SEARCH ------------------------------------------------
                                                   child: TextFormField(
-                                                    controller: _model
-                                                        .textController1,
-                                                    focusNode: _model
-                                                        .textFieldFocusNode1,
+                                                    controller: _model.textController1,
+                                                    focusNode: _model.textFieldFocusNode1,
+                                                    onChanged: (value) {
+                                                      context.read<VaultProvider>().setCredentialSearch(value);
+                                                    },
                                                     autofocus: false,
                                                     obscureText: false,
                                                     decoration:
@@ -362,8 +363,7 @@ Widget build(BuildContext context) {
                                                                       .labelMedium
                                                                       .fontStyle,
                                                                 ),
-                                                                color: Colors
-                                                                    .white,
+                                                                color: Colors.white,
                                                                 fontSize: 15.0,
                                                                 letterSpacing:
                                                                     0.0,
@@ -804,10 +804,11 @@ Widget build(BuildContext context) {
                                                       AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: TextFormField( 
-                                                    controller: _model
-                                                        .textController2,
-                                                    focusNode: _model
-                                                        .textFieldFocusNode2,
+                                                    controller: _model.textController2,
+                                                    focusNode: _model.textFieldFocusNode2,
+                                                    onChanged: (value) {
+                                                      context.read<VaultProvider>().setSubscriptionSearch(value);
+                                                    },
                                                     autofocus: false,
                                                     obscureText: false,
                                                     decoration:

@@ -12,7 +12,8 @@ class VaultProvider extends ChangeNotifier {
   List<Map<String, dynamic>> get credentials => _credentials;
   List<Map<String, dynamic>> get subscriptions => _subscriptions;
 
-  String _searchQuery = '';
+  String _credSearchQuery = '';
+  String _subSearchQuery = '';
   String _credentialSort = 'title ASC';
   String _subscriptionSort = 'newsletter_name ASC';
 
@@ -25,32 +26,27 @@ class VaultProvider extends ChangeNotifier {
 
   // ---- Refresh all lists from DB ------------------------------------
   Future<void> refresh() async {
-    _credentials = await _repository.getAllCredentials(
-      searchQuery: _searchQuery.isNotEmpty ? _searchQuery : null,
-      sortBy: _credentialSort,
-    );
-    _subscriptions = await _repository.getAllSubscriptions(
-      searchQuery: _searchQuery.isNotEmpty ? _searchQuery : null,
-      sortBy: _subscriptionSort,
-    );
-    notifyListeners();
+     _credentials = await _repository.getAllCredentials(
+    searchQuery: _credSearchQuery.isNotEmpty ? _credSearchQuery : null,
+    sortBy: _credentialSort,
+  );
+  _subscriptions = await _repository.getAllSubscriptions(
+    searchQuery: _subSearchQuery.isNotEmpty ? _subSearchQuery : null,
+    sortBy: _subscriptionSort,
+  );
+  notifyListeners();
   }
 
-  // ---- Search & Sort ------------------------------------------------
-  void setSearch(String query) {
-    _searchQuery = query;
-    refresh();
+  // ---- Search ------------------------------------------------
+  void setCredentialSearch(String query) {
+  _credSearchQuery = query;
+  refresh();   // or a dedicated refreshCredentials
   }
 
-  void setCredentialSort(String sort) {
-    _credentialSort = sort;
-    refresh();
-  }
-
-  void setSubscriptionSort(String sort) {
-    _subscriptionSort = sort;
-    refresh();
-  }
+  void setSubscriptionSearch(String query) {
+  _subSearchQuery = query;
+  refresh();
+}
 
   // ---- Credentials CRUD ---------------------------------------------
   Future<void> addCredential({
