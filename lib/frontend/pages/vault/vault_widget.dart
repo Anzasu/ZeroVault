@@ -250,7 +250,7 @@ Widget build(BuildContext context) {
                                                 child: Padding(
                                                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 16.0, 0.0),
                                                 child: Container(
-                                                  width: MediaQuery.sizeOf(context).width *0.40,
+                                                  width: MediaQuery.sizeOf(context).width *0.37,
                                                   height: MediaQuery.sizeOf(context).height *0.07,
                                                   decoration: BoxDecoration(),
                                                   child: Align(
@@ -259,11 +259,12 @@ Widget build(BuildContext context) {
                                                     child: Padding(
                                                       padding:EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                                                     child: FFButtonWidget( 
+                                                      icon: Icon(Icons.add, color: Colors.white,),
                                                     onPressed: () async {
                                                       await context.pushNamed(AddPassPageWidget.routeName);
                                                       context.read<VaultProvider>().refresh();
                                                     },
-                                                    text: 'Add password',
+                                                    text: 'Password',
                                                     options: FFButtonOptions(
                                                           width:
                                                               MediaQuery.sizeOf(
@@ -704,19 +705,20 @@ Widget build(BuildContext context) {
                                       children: [
                                         Padding(
                                           padding: EdgeInsetsDirectional
-                                              .fromSTEB(16.0, 0.0, 16.0, 16.0),
+                                              .fromSTEB(19.0, 20.0, 16.0, 10.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
+                                              // ----------------------------------------------------------------------- SUB ADD BUTTON -----------------------------------------
                                                 Align(
                                                   alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                   child: Padding(
                                                   padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 16.0, 0.0),
                                                   child: Container(
-                                                    width: MediaQuery.sizeOf(context).width *0.40,
+                                                    width: MediaQuery.sizeOf(context).width *0.4,
                                                     height: MediaQuery.sizeOf(context).height *0.07,
                                                     decoration: BoxDecoration(),
                                                     child: Align(
@@ -725,11 +727,12 @@ Widget build(BuildContext context) {
                                                       child: Padding(
                                                         padding:EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                                                       child: FFButtonWidget( 
+                                                        icon: Icon(Icons.add, color: Colors.white),
                                                       onPressed: () async {
                                                       await context.pushNamed(AddSubPageWidget.routeName);
                                                       context.read<VaultProvider>().refresh();
                                                     },
-                                                      text: 'Add subscription',
+                                                      text: 'Subscription',
                                                       options: FFButtonOptions(
                                                             width:
                                                                 MediaQuery.sizeOf(
