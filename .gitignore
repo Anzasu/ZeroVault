@@ -39,6 +39,18 @@ build/
 *.secret
 secrets/
 
+# Database files (if ever placed in the project)
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup files
+*.bak
+*.old
+
+# Sensitive debug logs (if any)
+*.log
+
 # Generated files (optional – uncomment if you prefer to keep them out of version control)
 # *.g.dart
 # *.freezed.dart
