@@ -73,7 +73,7 @@ class _AddPassPageWidgetState extends State<AddPassPageWidget> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 30.0, 0.0),
                 child: Text(
-                  'Add a new password',
+                  'Add new password',
                   style: FlutterFlowTheme.of(context).displaySmall.override(
                         font: GoogleFonts.montserrat(
                           fontWeight: FlutterFlowTheme.of(context)
@@ -676,12 +676,12 @@ class _AddPassPageWidgetState extends State<AddPassPageWidget> {
                       return;
                     }
  
-await context.read<VaultProvider>().addCredential(
-  title: title,
-  usernameOrEmail: emailOrUser,
-  password: password,
-  notes: notes.isNotEmpty ? notes : null,
-); 
+                      await context.read<VaultProvider>().addCredential(
+                        title: title,
+                        usernameOrEmail: emailOrUser,
+                        password: password,
+                        notes: notes.isNotEmpty ? notes : null,
+                      ); 
                       await showDialog(
                         context: context, 
                         builder: (ctx) => AlertDialog(

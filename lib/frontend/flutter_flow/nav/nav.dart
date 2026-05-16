@@ -65,11 +65,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AddPassPageWidget(),
         ),
         FFRoute(
-          name: EditSubPageWidget.routeName,
-          path: EditSubPageWidget.routePath,
-          builder: (context, params) => EditSubPageWidget(),
-        ),
-        FFRoute(
           name: SeePassPageWidget.routeName,
           path: SeePassPageWidget.routePath,
           builder: (context, params) {
@@ -82,10 +77,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: EditPassPageWidget.routeName,
           path: EditPassPageWidget.routePath,
           builder: (context, params) {
-          final extra = GoRouterState.of(context).extra;
-          final id = extra is int ? extra : -1;
-          return EditPassPageWidget(credentialId: id);
-            },
+            final idStr = params.state.uri.queryParameters['id'];
+            final id = idStr != null ? int.tryParse(idStr) ?? -1 : -1;
+            return EditPassPageWidget(credentialId: id);
+          },
+        ),
+        FFRoute(
+          name: EditSubPageWidget.routeName,
+          path: EditSubPageWidget.routePath,
+          builder: (context, params) {
+            final idStr = params.state.uri.queryParameters['id'];
+            final id = idStr != null ? int.tryParse(idStr) ?? -1 : -1;
+            return EditSubPageWidget(subId: id);   // <-- this line causes the error
+          },
+        ),
+        FFRoute(
+          name: AddSubPageWidget.routeName,
+          path: AddSubPageWidget.routePath,
+          builder: (context, params) => AddSubPageWidget(),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -79,6 +79,7 @@ class VaultProvider extends ChangeNotifier {
       usernameOrEmail: usernameOrEmail,
       password: password,
       notes: notes,
+      
     );
     await refresh();
   }
@@ -127,4 +128,13 @@ Map<String, dynamic>? getCredentialById(int id) {
     return null;
   }
 }
+
+Map<String, dynamic>? getSubscriptionById(int id) {
+  try {
+    return _subscriptions.firstWhere((c) => c['id'] == id);
+  } catch (_) {
+    return null;
+  }
+}
+
 }

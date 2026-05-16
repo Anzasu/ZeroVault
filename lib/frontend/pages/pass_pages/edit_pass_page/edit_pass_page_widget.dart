@@ -28,9 +28,37 @@ class _EditPassPageWidgetState extends State<EditPassPageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Map<String, dynamic>? _credential;
+  bool _loading = true;
+
+  Future<void> _loadData() async {
+    if (widget.credentialId < 0) {
+      setState(() {
+        _loading = false;
+        _credential = null;
+      });
+      return;
+    }
+
+    final provider = context.read<VaultProvider>();
+    final cred = provider.getCredentialById(widget.credentialId);
+    setState(() {
+      _credential = cred;
+      _loading = false;
+    });
+
+    if(cred != null){
+      _model.textController1.text = cred['title'] ?? '';
+      _model.textController2.text = cred['username_or_email'] ?? '';
+      _model.textController3.text = cred['password'] ?? '';
+      _model.textController4.text = cred['notes'] ?? '';
+    }
+  }
+
   @override
   void initState() {
     super.initState(); 
+
     _model = createModel(context, () => EditPassPageModel());
 
     _model.textController1 ??= TextEditingController();
@@ -44,6 +72,9 @@ class _EditPassPageWidgetState extends State<EditPassPageWidget> {
 
     _model.textController4 ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
+
+    _loadData();
+
   }
 
   @override
@@ -116,6 +147,7 @@ class _EditPassPageWidgetState extends State<EditPassPageWidget> {
                     onPressed: () async {
                       await context.pushNamed(VaultWidget.routeName);
                       context.read<VaultProvider>().refresh();
+                      /** IMPLEMENT CHECK IF USER REALLY WANTS TO LEAVE IF HE HAS CHANGED ANY OF THE VALUES** */
                     },
                   ),
                 ),
@@ -690,24 +722,27 @@ class _EditPassPageWidgetState extends State<EditPassPageWidget> {
                       return;
                     }
  
-await context.read<VaultProvider>().addCredential(
-  title: title,
-  usernameOrEmail: emailOrUser,
-  password: password,
-  notes: notes.isNotEmpty ? notes : null,
-); 
-                      await showDialog(
-                        context: context, 
-                        builder: (ctx) => AlertDialog(
-                          title: const Text('Success'),
-                          content: const Text('New entry saved successfully'),
-                          actions: [
-                            TextButton(onPressed: () => Navigator.of(ctx).pop(), 
-                            child: const Text('OK')),
-                          ],
-                        ),
-                      );
-                      if (mounted) Navigator.of(context).pop();
+                    await context.read<VaultProvider>().updateCredential(
+                      widget.credentialId,
+                      title: title,
+                      usernameOrEmail: emailOrUser,
+                      password: password,
+                      notes: notes.isNotEmpty ? notes : null,
+                    );
+                    
+                    await showDialog(
+                      context: context, 
+                      builder: (ctx) => AlertDialog(
+                        title: const Text('Success'),
+                        content: const Text('Changes saved successfully'),
+                        actions: [
+                          TextButton(onPressed: () => Navigator.of(ctx).pop(), 
+                          child: const Text('OK')),
+                        ],
+                      ),
+                    );
+                    
+                    if (mounted) Navigator.of(context).pop();
                   },
                   text: 'Save',
                   options: FFButtonOptions(

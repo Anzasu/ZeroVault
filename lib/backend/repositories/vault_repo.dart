@@ -67,10 +67,16 @@ class VaultRepo {
     final updates = <String, dynamic>{
       'updated_at': DateTime.now().toIso8601String(),
     };
+    
     if(title != null) updates['title'] = title;
     if(usernameOrEmail != null) updates['username_or_email'] = usernameOrEmail;
     if(password != null) updates['encrypted_password'] = _encryption.encrypt(password);
-    if(notes != null) updates['encrypted_notes'] = _encryption.encrypt(notes);
+    if (notes != null) {
+      updates['encrypted_notes'] = _encryption.encrypt(notes);
+    } else {
+      updates['encrypted_notes'] = null;   // <-- explicitly clear the column
+    }    
+    
     await db.update('credentials', updates, where: 'id = ?', whereArgs: [id]);
   }
 

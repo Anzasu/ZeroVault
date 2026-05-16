@@ -21,6 +21,8 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
   Map<String, dynamic>? _credential;
   bool _loading = true;
 
+  
+
   @override
   void initState() {
     super.initState();
@@ -108,7 +110,7 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Container(
                         constraints: const BoxConstraints(maxWidth: 500),
                         child: Column(
@@ -133,10 +135,13 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
                             // Notes
                             _buildLabel('Notes'),
                             const SizedBox(height: 10),
-                            _buildCopyRow(
-                              _credential!['notes'] ?? 'No notes',
-                              showIfEmpty: true,
-                            ),
+                            () {
+                              final notesText = _credential!['notes'];
+                              final displayNotes = (notesText == null || notesText.isEmpty)
+                                ? 'No notes'
+                                  : notesText;
+                              return _buildCopyRow(displayNotes, showIfEmpty: true);
+                            }(),
                           ],
                         ),
                       ),
@@ -179,7 +184,7 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
       children: [
         Expanded(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,  
               borderRadius: BorderRadius.circular(8.0),
