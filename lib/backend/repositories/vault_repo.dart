@@ -74,7 +74,7 @@ class VaultRepo {
     if (notes != null) {
       updates['encrypted_notes'] = _encryption.encrypt(notes);
     } else {
-      updates['encrypted_notes'] = null;   // <-- explicitly clear the column
+      updates['encrypted_notes'] = null;   
     }    
     
     await db.update('credentials', updates, where: 'id = ?', whereArgs: [id]);
@@ -131,7 +131,12 @@ class VaultRepo {
     };
     if (newsletterName != null) updates['newsletter_name'] = newsletterName;
     if (email != null) updates['email'] = email;
-    if (frequency != null) updates['frequency'] = frequency;
+    if (frequency != null) {
+      updates['frequency'] = frequency;
+    } else {
+      updates['frequency'] = null;   
+    }
+
     await db.update('subscriptions', updates, where: 'id = ?', whereArgs: [id]);
   }
 

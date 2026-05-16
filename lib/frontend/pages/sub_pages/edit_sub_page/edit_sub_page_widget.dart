@@ -54,6 +54,7 @@ class _EditSubPageWidgetState extends State<EditSubPageWidget> {
     if(sub != null){
       _model.textController1.text = sub['newsletter_name'] ?? '';
       _model.textController2.text = sub['email'] ?? '';
+      _selectedFrequency = sub?['frequency'] as String?;
     }
   }
 
@@ -393,26 +394,26 @@ class _EditSubPageWidgetState extends State<EditSubPageWidget> {
                       );
                       return;
                     }
-
-                    await context.read<VaultProvider>().addSubscription(
+ 
+                    await context.read<VaultProvider>().updateSubscription(
+                      widget.subId,
                       newsletterName: newsletterName,
                       email: email,
                       frequency: frequency,
                     );
-
+                    
                     await showDialog(
-                      context: context,
+                      context: context, 
                       builder: (ctx) => AlertDialog(
                         title: const Text('Success'),
-                        content: const Text('Subscription saved successfully'),
+                        content: const Text('Changes saved successfully'),
                         actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(ctx).pop(),
-                            child: const Text('OK'),
-                          ),
+                          TextButton(onPressed: () => Navigator.of(ctx).pop(), 
+                          child: const Text('OK')),
                         ],
                       ),
                     );
+                    
                     if (mounted) Navigator.of(context).pop();
                   },
                   text: 'Save',

@@ -232,19 +232,102 @@ Widget build(BuildContext context) {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 15.0, 0.0, 0.0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Padding(
-                                          padding: EdgeInsetsDirectional
-                                              .fromSTEB(16.0, 0.0, 16.0, 16.0),
+                                          padding: EdgeInsetsDirectional.fromSTEB(9.0, 20.0, 16.0, 10.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
+                                        // ---------------------------------------------- PASS ADD BUTTON --------------------------------------------------
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                                child: Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 16.0, 0.0),
+                                                child: Container(
+                                                  width: MediaQuery.sizeOf(context).width *0.40,
+                                                  height: MediaQuery.sizeOf(context).height *0.07,
+                                                  decoration: BoxDecoration(),
+                                                  child: Align(
+                                                    alignment:
+                                                        AlignmentDirectional(0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                                                    child: FFButtonWidget( 
+                                                    onPressed: () async {
+                                                      await context.pushNamed(AddPassPageWidget.routeName);
+                                                      context.read<VaultProvider>().refresh();
+                                                    },
+                                                    text: 'Add password',
+                                                    options: FFButtonOptions(
+                                                          width:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .width *
+                                                                  1.0,
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  0.25,
+                                                          padding:
+                                                              EdgeInsets.all(8.0),
+                                                          iconPadding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0.0,
+                                                                      0.0, 0.0,
+                                                                      0.0),
+                                                          color: FlutterFlowTheme.of(context).primary,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .override(
+                                                                    font: GoogleFonts
+                                                                        .interTight(
+                                                                      fontWeight: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .titleSmall
+                                                                          .fontWeight,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .titleSmall
+                                                                          .fontStyle,
+                                                                    ),
+                                                                    color: Colors
+                                                                        .white,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .fontStyle,
+                                                                  ),
+                                                          elevation: 2.0,
+                                                          borderSide: BorderSide(
+                                                            color:
+                                                                Colors.transparent,
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  10.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                               Expanded(
                                                 child: Align(
                                                   alignment:
@@ -388,7 +471,7 @@ Widget build(BuildContext context) {
                                               
                                             ],
                                           ),
-                                        ),
+                                        ),                                        
                                         // ------------------------------------------------------------ PASSWORD ENTRIES ---------------------------------------------------------
                                         Padding(
                                           padding: EdgeInsetsDirectional
@@ -597,100 +680,7 @@ Widget build(BuildContext context) {
                                             },
                                           ),
                                         ),
-                                        // Add button
-                                        Align(
-                                          alignment: AlignmentDirectional(
-                                              0.0, 0.0),
-                                          child: Padding(
-                                            padding: EdgeInsetsDirectional
-                                                .fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                            child: Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.5,
-                                              height: MediaQuery.sizeOf(context)
-                                                      .height *
-                                                  0.07,
-                                              decoration: BoxDecoration(),
-                                              child: Align(
-                                                alignment:
-                                                    AlignmentDirectional(
-                                                        0.0, 0.0),
-                                                child: Padding(
-                                                  padding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 16.0),
-                                                  child: FFButtonWidget( // ---------------------------------------------- PASS ADD BUTTON --------------------------------------------------
-                                                    onPressed: () async {
-                                                      await context.pushNamed(AddPassPageWidget.routeName);
-                                                      context.read<VaultProvider>().refresh();
-                                                    },
-                                                    text: 'Add password',
-                                                    options: FFButtonOptions(
-                                                          width:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .width *
-                                                                  1.0,
-                                                          height:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .height *
-                                                                  0.25,
-                                                          padding:
-                                                              EdgeInsets.all(8.0),
-                                                          iconPadding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0.0,
-                                                                      0.0, 0.0,
-                                                                      0.0),
-                                                          color: FlutterFlowTheme.of(context).primary,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .override(
-                                                                    font: GoogleFonts
-                                                                        .interTight(
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleSmall
-                                                                          .fontWeight,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleSmall
-                                                                          .fontStyle,
-                                                                    ),
-                                                                    color: Colors
-                                                                        .white,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .fontWeight,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .fontStyle,
-                                                                  ),
-                                                          elevation: 2.0,
-                                                          borderSide: BorderSide(
-                                                            color:
-                                                                Colors.transparent,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  20.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        
                                       ],
                                     ),
                                   ),
@@ -720,12 +710,97 @@ Widget build(BuildContext context) {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
+                                                Align(
+                                                  alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                  child: Padding(
+                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 16.0, 0.0),
+                                                  child: Container(
+                                                    width: MediaQuery.sizeOf(context).width *0.40,
+                                                    height: MediaQuery.sizeOf(context).height *0.07,
+                                                    decoration: BoxDecoration(),
+                                                    child: Align(
+                                                      alignment:
+                                                          AlignmentDirectional(0.0, 0.0),
+                                                      child: Padding(
+                                                        padding:EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                                                      child: FFButtonWidget( 
+                                                      onPressed: () async {
+                                                      await context.pushNamed(AddSubPageWidget.routeName);
+                                                      context.read<VaultProvider>().refresh();
+                                                    },
+                                                      text: 'Add subscription',
+                                                      options: FFButtonOptions(
+                                                            width:
+                                                                MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .width *
+                                                                    1.0,
+                                                            height:
+                                                                MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .height *
+                                                                    0.25,
+                                                            padding:
+                                                                EdgeInsets.all(8.0),
+                                                            iconPadding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(0.0,
+                                                                        0.0, 0.0,
+                                                                        0.0),
+                                                            color: FlutterFlowTheme.of(context).primary,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      font: GoogleFonts
+                                                                          .interTight(
+                                                                        fontWeight: FlutterFlowTheme.of(
+                                                                                context)
+                                                                            .titleSmall
+                                                                            .fontWeight,
+                                                                        fontStyle: FlutterFlowTheme.of(
+                                                                                context)
+                                                                            .titleSmall
+                                                                            .fontStyle,
+                                                                      ),
+                                                                      color: Colors
+                                                                          .white,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .titleSmall
+                                                                          .fontWeight,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .titleSmall
+                                                                          .fontStyle,
+                                                                    ),
+                                                            elevation: 2.0,
+                                                            borderSide: BorderSide(
+                                                              color:
+                                                                  Colors.transparent,
+                                                              width: 1.0,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    10.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        // ------------------------------------------------------------------------ SUB SEARCH BAR ---------------------------------------------
                                               Expanded(
                                                 child: Align(
                                                   alignment:
                                                       AlignmentDirectional(
                                                           0.0, 0.0),
-                                                  child: TextFormField( // ---------------------------------------------- SUB SEARCH BAR ---------------------------------------------
+                                                  child: TextFormField( 
                                                     controller: _model
                                                         .textController2,
                                                     focusNode: _model
@@ -939,7 +1014,7 @@ Widget build(BuildContext context) {
                                                                         .fontStyle,
                                                                   ),
                                                             ),
-                                                            Text('${item['frequency'] ?? 'Frequency not defined'}',
+                                                            Text('${item['frequency'] ?? 'Not defined'}',
                                                               style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodySmall
@@ -1049,8 +1124,25 @@ Widget build(BuildContext context) {
                                                                 size: 20.0,
                                                               ),
                                                               onPressed: () async {
-                                                                print('DELETE PRESSED');
-                                                              },
+                                                                await showDialog(
+                                                                  context: context, 
+                                                                  builder: (ctx) => AlertDialog(
+                                                                    title: Text('Delete entry'),
+                                                                    content: Text('Delete this entry permanently?'),
+                                                                    actions: [
+                                                                      TextButton(onPressed: () => Navigator.of(ctx).pop(),
+                                                                      child: const Text('No'),
+                                                                      ),
+                                                                      TextButton(onPressed: () async {
+                                                                        if (mounted){
+                                                                          Navigator.of(context).pop();
+                                                                          await context.read<VaultProvider>().deleteSubscription(item['id'] as int);
+                                                                        }
+                                                                      }, child: const Text('Yes'),)
+                                                                    ],
+                                                                  )
+                                                                );
+                                                              }
                                                             ),
                                                           ].divide(SizedBox(
                                                               width: 12.0)),
@@ -1063,99 +1155,7 @@ Widget build(BuildContext context) {
                                             },
                                           ),
                                         ),
-                                        Align(
-                                          alignment: AlignmentDirectional(
-                                              0.0, 0.0),
-                                          child: Padding(
-                                            padding: EdgeInsetsDirectional
-                                                .fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                            child: Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.5,
-                                              height: MediaQuery.sizeOf(context)
-                                                      .height *
-                                                  0.07,
-                                              decoration: BoxDecoration(),
-                                              child: Align(
-                                                alignment:
-                                                    AlignmentDirectional(
-                                                        0.0, 0.0),
-                                                child: Padding(
-                                                  padding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 16.0),
-                                                  child: FFButtonWidget( // ---------------------------------------------- SUB ADD BUTTON --------------------------------------------------
-                                                    onPressed: () async {
-                                                      await context.pushNamed(AddSubPageWidget.routeName);
-                                                      context.read<VaultProvider>().refresh();
-                                                    },
-                                                    text: 'Add subscription',
-                                                    options: FFButtonOptions(
-                                                          width:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .width *
-                                                                  1.0,
-                                                          height:
-                                                              MediaQuery.sizeOf(
-                                                                          context)
-                                                                      .height *
-                                                                  0.25,
-                                                          padding:
-                                                              EdgeInsets.all(8.0),
-                                                          iconPadding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0.0,
-                                                                      0.0, 0.0,
-                                                                      0.0),
-                                                          color: FlutterFlowTheme.of(context).primary,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .override(
-                                                                    font: GoogleFonts
-                                                                        .interTight(
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleSmall
-                                                                          .fontWeight,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleSmall
-                                                                          .fontStyle,
-                                                                    ),
-                                                                    color: Colors
-                                                                        .white,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .fontWeight,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .fontStyle,
-                                                                  ),
-                                                          elevation: 2.0,
-                                                          borderSide: BorderSide(
-                                                            color:
-                                                                Colors.transparent,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  20.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        
                                       ],
                                     ),
                                   ),
