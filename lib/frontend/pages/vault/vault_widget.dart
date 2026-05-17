@@ -74,13 +74,18 @@ class _VaultWidgetState extends State<VaultWidget>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
       _lockTimer?.cancel();
-      _lockTimer = Timer(const Duration(minutes: 5), () {
-        if (mounted) {
-          context.read<AuthProvider>().lock();
-          setState(() => _lockedInBackground = true);
-        }
+      
+      _lockTimer = Timer(const Duration(seconds: 60), () {
+        _lockTimer?.cancel();
+        _lockTimer = Timer(const Duration(minutes: 10), () {
+          if (mounted) {
+            context.read<AuthProvider>().lock();
+            setState(() => _lockedInBackground = true);
+          }
+        });
       });
     } else if (state == AppLifecycleState.resumed) {
+      // Cancel any pending timers (debounce or real)
       _lockTimer?.cancel();
       if (_lockedInBackground) {
         _lockedInBackground = false;
@@ -91,7 +96,6 @@ class _VaultWidgetState extends State<VaultWidget>
       }
     }
   }
-
   @override
   Widget build(BuildContext context) {
     final vaultProvider = context.watch<VaultProvider>();
