@@ -1,0 +1,3 @@
+# Security‑sensitive code requires a review from the core maintainer
+lib/backend/** @Anzasu
+lib/services/** @Anzasu
