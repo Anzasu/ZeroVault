@@ -6,6 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:zero_vault/frontend/pages/pass_pages/edit_pass_page/edit_pass_page_widget.dart';
 import 'package:zero_vault/frontend/pages/pass_pages/see_pass_page/see_pass_page_widget.dart';
+import 'package:zero_vault/frontend/pages/splashpage.dart';
 
 import '../../../main.dart';
 import '../flutter_flow_theme.dart';
@@ -47,7 +48,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => LockScreenWidget(),
+          builder: (context, _) => SplashPage(),
         ),
         FFRoute(
           name: LockScreenWidget.routeName,

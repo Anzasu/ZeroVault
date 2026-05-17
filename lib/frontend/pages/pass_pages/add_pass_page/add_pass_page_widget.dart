@@ -1,4 +1,5 @@
 import 'package:zero_vault/backend/providers/vault_provider.dart';
+import 'package:zero_vault/frontend/pages/vault/vault_widget.dart';
 
 import '../../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../../flutter_flow/flutter_flow_theme.dart';
@@ -103,7 +104,10 @@ class _AddPassPageWidgetState extends State<AddPassPageWidget> {
               borderRadius: 20.0,
               buttonSize: 44.0,
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 30.0),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () async {
+                              await context.pushNamed(VaultWidget.routeName);
+                              context.read<VaultProvider>().refresh();
+                            },
             ),
           ),
             ],
@@ -688,7 +692,10 @@ class _AddPassPageWidgetState extends State<AddPassPageWidget> {
                           title: const Text('Success'),
                           content: const Text('New entry saved successfully'),
                           actions: [
-                            TextButton(onPressed: () => Navigator.of(ctx).pop(), 
+                            TextButton(onPressed: () async {
+                              await context.pushNamed(VaultWidget.routeName);
+                              context.read<VaultProvider>().refresh();
+                            }, 
                             child: const Text('OK')),
                           ],
                         ),

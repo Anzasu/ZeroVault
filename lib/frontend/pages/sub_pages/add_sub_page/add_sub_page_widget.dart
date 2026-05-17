@@ -1,4 +1,6 @@
 import 'package:zero_vault/backend/providers/vault_provider.dart';
+import 'package:zero_vault/frontend/pages/pass_pages/add_pass_page/add_pass_page_widget.dart';
+import 'package:zero_vault/frontend/pages/vault/vault_widget.dart';
 
 import '../../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../../flutter_flow/flutter_flow_theme.dart';
@@ -101,7 +103,10 @@ class _AddSubPageWidgetState extends State<AddSubPageWidget> {
                   borderRadius: 20.0,
                   buttonSize: 44.0,
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 30.0),
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () async {
+                    await context.pushNamed(VaultWidget.routeName);
+                    context.read<VaultProvider>().refresh();
+                  },
                 ),
               ),
             ],
@@ -370,7 +375,10 @@ class _AddSubPageWidgetState extends State<AddSubPageWidget> {
                         content: const Text('Subscription saved successfully'),
                         actions: [
                           TextButton(
-                            onPressed: () => Navigator.of(ctx).pop(),
+                            onPressed: () async {
+                              await context.pushNamed(VaultWidget.routeName);
+                              context.read<VaultProvider>().refresh();
+                            },
                             child: const Text('OK'),
                           ),
                         ],

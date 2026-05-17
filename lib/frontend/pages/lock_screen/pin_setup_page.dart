@@ -46,7 +46,7 @@ class _PinSetupPageState extends State<PinSetupPage> {
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 60.0, 0.0, 0.0),
+                            20.0, 60.0, 20.0, 0.0),
                       child: Text(
                         'Welcome to ',
                         style: FlutterFlowTheme.of(context).titleSmall.override(
@@ -60,7 +60,7 @@ class _PinSetupPageState extends State<PinSetupPage> {
                               ),
                               color: FlutterFlowTheme.of(context).primary,
                               fontSize: 40.0,
-                              letterSpacing: 0.0,
+                              letterSpacing: 2,
                               fontWeight: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .fontWeight,
@@ -74,7 +74,7 @@ class _PinSetupPageState extends State<PinSetupPage> {
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 0.0, 15.0, 0.0),
+                            0.0, 0.0, 0.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
@@ -105,8 +105,8 @@ class _PinSetupPageState extends State<PinSetupPage> {
                                     .fontStyle,
                               ),
                               color: FlutterFlowTheme.of(context).primary,
-                              fontSize: 25.0,
-                              letterSpacing: 0.0,
+                              fontSize: 30.0,
+                              letterSpacing: 2,
                               fontWeight: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .fontWeight,
@@ -115,9 +115,9 @@ class _PinSetupPageState extends State<PinSetupPage> {
                                   .fontStyle,
                             ),
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 5),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
               child: Text(
               'Please store your PIN in a safe place. \nWithout it the app cannot be opened again and all your data is lost.',
               textAlign: TextAlign.center,
@@ -130,18 +130,21 @@ class _PinSetupPageState extends State<PinSetupPage> {
                                     .titleSmall
                                     .fontStyle,
                               ),
-                              color: Color(0xFFE5E7EB),
+                              color: Color.fromARGB(255, 207, 209, 212),
                               fontSize: 15.0,
-                              letterSpacing: 0.0,
+                              letterSpacing: 1,
                               fontWeight: FlutterFlowTheme.of(context).bodySmall.fontWeight,
                               fontStyle: FlutterFlowTheme.of(context).bodySmall.fontStyle,
                             ),
             ),
             ),
             
-            const SizedBox(height: 30),
-            PinCodeTextField(
+            const SizedBox(height: 60),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+              child: PinCodeTextField(
               key: ValueKey(_isConfirmStep),
+              autoFocus: false,
               appContext: context,
               length: 6,
               obscureText: false,
@@ -154,9 +157,25 @@ class _PinSetupPageState extends State<PinSetupPage> {
                 inactiveColor: Colors.white,
               ),
               cursorColor: Colors.white,
+              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                              font: GoogleFonts.montserrat(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                              color: Color.fromARGB(255, 207, 209, 212),
+                              fontSize: 15.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context).bodySmall.fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context).bodySmall.fontStyle,
+                            ),
+                ),
             ),
             if (_error != null) Text(_error!, style: const TextStyle(color: Colors.red)),
-            const SizedBox(height: 40),
+            const SizedBox(height: 90),
             FFButtonWidget(
               text: _isConfirmStep ? 'Save PIN' : 'Next', 
               onPressed: _isConfirmStep ? _confirmPin : _goToConfirm, 

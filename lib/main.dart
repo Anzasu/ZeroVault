@@ -22,9 +22,9 @@ void main() async {
   await DBHelper.database;
 
   final authProvider = AuthProvider();
-  await authProvider.initialize();
+  authProvider.initialize();
 
-    final vaultProvider = VaultProvider();
+  final vaultProvider = VaultProvider();
 
 
   runApp(

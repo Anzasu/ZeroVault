@@ -86,6 +86,7 @@ dependency_overrides:
   uuid: ^4.0.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.1
   flutter_lints: 4.0.0
   lints: 4.0.0
   flutter_test:
@@ -112,7 +113,13 @@ flutter:
     - assets/pdfs/
     - assets/jsons/
 
-
+flutter_launcher_icons:
+   android: true
+   ios: true
+   image_path: "assets/images/zerovaultLogo2.JPG"
+   remove_alpha_ios: true
+   adaptive_icon_background: "#121212"
+   adaptive_icon_foreground: "assets/images/zerovaultLogo2.JPG"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

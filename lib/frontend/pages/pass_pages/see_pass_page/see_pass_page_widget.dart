@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:zero_vault/backend/providers/vault_provider.dart';
 import 'package:zero_vault/frontend/flutter_flow/flutter_flow_theme.dart';
+import 'package:zero_vault/frontend/flutter_flow/flutter_flow_util.dart';
+import 'package:zero_vault/frontend/pages/vault/vault_widget.dart';
 import '../../../flutter_flow/flutter_flow_icon_button.dart';
 
 class SeePassPageWidget extends StatefulWidget {
@@ -94,7 +96,10 @@ class _SeePassPageWidgetState extends State<SeePassPageWidget> {
               borderRadius: 20.0,
               buttonSize: 44.0,
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 30.0),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () async {
+                              await context.pushNamed(VaultWidget.routeName);
+                              context.read<VaultProvider>().refresh();
+                            },
             ),
           ),
         ],

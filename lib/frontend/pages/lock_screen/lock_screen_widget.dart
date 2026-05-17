@@ -32,32 +32,14 @@ class _LockScreenWidgetState extends State<LockScreenWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  bool _wrongPin = false;
   @override
 void initState() {
   super.initState();
+  //fi no pin the redirect to Onboarding
   _model = createModel(context, () => LockScreenModel());
   _model.pinCodeFocusNode ??= FocusNode();
-//fi no pin the redirect to Onboarding
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    final auth = context.read<AuthProvider>();
 
-    /**
-     * TODO:
-     * Before redirected to Pin setup the lock screen is displayed for a second
-     * --> add a loading page or smth that covers that up
-     * Also everytime the lock or pin page opens the keyboard flashes open and closes
-     * --> stop that. keybaord only opens when clicked on the field
-     * 
-     * ALSO: Add Splash PAge with Zero Vault Logo and Zero Vault App Icon
-     * When I save a new password I get redirected to the lock screen because that was the last page on the stack 
-     * --> it has to go to Vault
-     */
-    if (!auth.hasPin) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const PinSetupPage()),
-      );
-    }
-  });
 }
 
   @override
@@ -69,6 +51,7 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -85,7 +68,7 @@ void initState() {
             children: [
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
-                height: MediaQuery.sizeOf(context).height * 0.15,
+                height: MediaQuery.sizeOf(context).height * 0.10,
                 decoration: BoxDecoration(),
               ),
               Container(
@@ -99,7 +82,7 @@ void initState() {
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 15.0, 15.0, 15.0),
+                            15.0, 15.0, 15.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
@@ -115,7 +98,8 @@ void initState() {
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Text(
-                        'Zero tracking. Zero cloud. 100% privacy',
+                        'Zero tracking. Zero cloud. \n100% privacy',
+                        textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).titleSmall.override(
                               font: GoogleFonts.montserrat(
                                 fontWeight: FlutterFlowTheme.of(context)
@@ -140,6 +124,25 @@ void initState() {
                   ],
                 ),
               ),
+              if (_wrongPin) Text("Wrong PIN", style: FlutterFlowTheme.of(context).labelLarge.override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontStyle,
+                                  ),
+                                  color: Colors.red,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
+                                ),),
+              const SizedBox(height: 20.0,),
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
                 height: MediaQuery.sizeOf(context).height * 0.3,
@@ -164,7 +167,7 @@ void initState() {
                                         .labelLarge
                                         .fontStyle,
                                   ),
-                                  color: Color(0xFF0D9488),
+                                  color: Colors.white,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .labelLarge
@@ -175,15 +178,16 @@ void initState() {
                                 ),
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         enableActiveFill: false,
-                        autoFocus: true,
+                        autoFocus: false,
                         focusNode: _model.pinCodeFocusNode,
                         enablePinAutofill: false,
                         errorTextSpace: 16.0,
                         showCursor: true,
                         cursorColor: FlutterFlowTheme.of(context).primary,
                         obscureText: true,
-                        obscuringCharacter: '*',
-                        hintCharacter: '●',
+                        obscuringCharacter: '●',
+                        
+                        hintCharacter: '-',
                         keyboardType: TextInputType.number,
                         pinTheme: PinTheme(
                           fieldHeight: 44.0,
@@ -196,12 +200,16 @@ void initState() {
                             topRight: Radius.circular(12.0),
                           ),
                           shape: PinCodeFieldShape.box,
-                          activeColor: FlutterFlowTheme.of(context).primary,
-                          inactiveColor: Color(0xFF656565),
-                          selectedColor: Colors.white,
+                          activeColor: _wrongPin ? Colors.red : FlutterFlowTheme.of(context).primary,
+                          inactiveColor: _wrongPin ? Colors.red : Color(0xFF656565),
+                          selectedColor: _wrongPin ? Colors.red : Colors.white,
                         ),
                         controller: _model.pinCodeController,
-                        onChanged: (_) {},
+                        onChanged: (_) {
+                         /*if (_wrongPin) {
+                            setState(() => _wrongPin = false);
+                          }*/
+                        },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: _model.pinCodeControllerValidator
                             .asValidator(context),
@@ -225,7 +233,7 @@ void initState() {
                           buttonSize: 100.0,
                           icon: Icon(
                             Icons.login_rounded,
-                            color: Color(0xFF0077FF),
+                            color: FlutterFlowTheme.of(context).primary,
                             size: 50.0,
                           ),
                           onPressed: () async {
@@ -235,26 +243,24 @@ void initState() {
                             final authService = AuthService();
                             final masterKey = await authService.verifyPin(pin);
                             if (masterKey == null) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Wrong PIN')),
-                              );
+                               setState(() => _wrongPin = true);
+                               _model.pinCodeController?.clear();
                               return;
                             }
 
                             MasterKeyProvider.setKey(masterKey);
-                            final vault = VaultProvider();
+                            final vault = context.read<VaultProvider>();
                             await vault.init(masterKey);
                             context.read<AuthProvider>().unlock();
 
                             if (mounted) {
                               Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(builder: (_) => ChangeNotifierProvider.value(
-                                  value: vault,
-                                  child: const VaultWidget(),
-                                )),
+                                MaterialPageRoute(builder: (_) => const VaultWidget()),
                                 (route) => false,
                               );
+                              
                             }
+                            
                           },
 
                         ),

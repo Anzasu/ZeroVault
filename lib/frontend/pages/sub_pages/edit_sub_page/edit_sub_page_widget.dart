@@ -139,7 +139,10 @@ class _EditSubPageWidgetState extends State<EditSubPageWidget> {
                   borderRadius: 20.0,
                   buttonSize: 44.0,
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 30.0),
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () async {
+                              await context.pushNamed(VaultWidget.routeName);
+                              context.read<VaultProvider>().refresh();
+                            },
                 ),
               ),
             ],
@@ -414,7 +417,10 @@ class _EditSubPageWidgetState extends State<EditSubPageWidget> {
                       ),
                     );
                     
-                    if (mounted) Navigator.of(context).pop();
+                    if (mounted){
+                              await context.pushNamed(VaultWidget.routeName);
+                              context.read<VaultProvider>().refresh();
+                            };
                   },
                   text: 'Save',
                   options: FFButtonOptions(
