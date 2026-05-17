@@ -51,6 +51,14 @@ secrets/
 # Sensitive debug logs (if any)
 *.log
 
-# Generated files (optional – uncomment if you prefer to keep them out of version control)
-# *.g.dart
-# *.freezed.dart
+# Signing keys & properties (anywhere in the project)
+*.jks
+*.keystore
+key.properties
+
+# Android app build output (in addition to root build/)
+android/app/build/
+
+# APK files (just in case they end up outside build/)
+*.apk
+*.aab
