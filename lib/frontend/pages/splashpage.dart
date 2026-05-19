@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:zero_vault/backend/providers/auth_provider.dart';
@@ -33,9 +34,7 @@ class _SplashPageState extends State<SplashPage> {
 
     // Navigate to the correct page
     if (auth.hasPin) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const LockScreenWidget()),
-      );
+      context.go(LockScreenWidget.routePath);
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const PinSetupPage()),

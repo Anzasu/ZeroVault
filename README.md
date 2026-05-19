@@ -1,3 +1,4 @@
+# STILL IN DEVELOPMENT
 # ZeroVault – Offline Password & Email Subscription Tracker
 
 ZeroVault is a **privacy-first, offline-only** password manager and email subscription tracker built with Flutter.  

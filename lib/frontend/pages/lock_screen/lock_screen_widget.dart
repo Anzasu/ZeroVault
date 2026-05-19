@@ -254,11 +254,7 @@ void initState() {
                             context.read<AuthProvider>().unlock();
 
                             if (mounted) {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(builder: (_) => const VaultWidget()),
-                                (route) => false,
-                              );
-                              
+                              context.go(VaultWidget.routePath);
                             }
                             
                           },

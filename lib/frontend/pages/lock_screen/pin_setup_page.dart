@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
@@ -240,22 +241,14 @@ class _PinSetupPageState extends State<PinSetupPage> {
 
   // Set the key and initialise the vault
   MasterKeyProvider.setKey(masterKey);
-  final vault = VaultProvider();
+  final vault = context.read<VaultProvider>();
   await vault.init(masterKey);
 
   // Notify the auth provider
   context.read<AuthProvider>().pinCreated();
 
   if (mounted) {
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (_) => ChangeNotifierProvider.value(
-          value: vault,
-          child: const VaultWidget(),
-        ),
-      ),
-      (route) => false,
-    );
+    context.go(VaultWidget.routePath);
   }
   }
 }

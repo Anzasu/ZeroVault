@@ -89,10 +89,7 @@ class _VaultWidgetState extends State<VaultWidget>
       _lockTimer?.cancel();
       if (_lockedInBackground) {
         _lockedInBackground = false;
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => const LockScreenWidget()),
-          (route) => false,
-        );
+        context.go(LockScreenWidget.routePath);
       }
     }
   }
