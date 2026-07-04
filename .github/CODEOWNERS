@@ -1,3 +1,2 @@
-# Security‑sensitive code requires a review from the core maintainer
-lib/backend/** @Anzasu
-lib/services/** @Anzasu
+# Require review from the maintainer for all changes
+* @your-github-username
