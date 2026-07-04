@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:zero_vault/backend/providers/auth_provider.dart';
 import 'package:zero_vault/backend/providers/vault_provider.dart';
@@ -14,6 +15,9 @@ import 'frontend/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  GoogleFonts.config.allowRuntimeFetching = false;
+
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 

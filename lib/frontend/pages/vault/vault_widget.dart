@@ -546,21 +546,36 @@ class _VaultWidgetState extends State<VaultWidget>
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize.max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                item['title'], // .................................  
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleMedium
-                                                                    .override(
-                                                                      font: GoogleFonts
-                                                                          .interTight(
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize.max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  item['title'], //   Page name
+                                                                  maxLines: 1,
+                                                                  overflow: TextOverflow.ellipsis,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMedium
+                                                                      .override(
+                                                                        font: GoogleFonts
+                                                                            .interTight(
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w600,
+                                                                          fontStyle: FlutterFlowTheme.of(
+                                                                                  context)
+                                                                              .titleMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                        color: Color(
+                                                                            0xFFE5E7EB),
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                         fontWeight:
                                                                             FontWeight
                                                                                 .w600,
@@ -569,34 +584,37 @@ class _VaultWidgetState extends State<VaultWidget>
                                                                             .titleMedium
                                                                             .fontStyle,
                                                                       ),
-                                                                      color: Color(
-                                                                          0xFFE5E7EB),
-                                                                      letterSpacing:
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
                                                                           0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleMedium
-                                                                          .fontStyle,
-                                                                    ),
-                                                              ),
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        4.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                                child: Text(
-                                                                  item['username_or_email'] ?? '',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .override(
-                                                                        font: GoogleFonts
-                                                                            .inter(
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    item['username_or_email'] ?? '',
+                                                                    maxLines: 1,
+                                                                    overflow: TextOverflow.ellipsis,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .override(
+                                                                          font: GoogleFonts
+                                                                              .inter(
+                                                                            fontWeight: FlutterFlowTheme.of(
+                                                                                    context)
+                                                                                .bodySmall
+                                                                                .fontWeight,
+                                                                            fontStyle: FlutterFlowTheme.of(
+                                                                                    context)
+                                                                                .bodySmall
+                                                                                .fontStyle,
+                                                                          ),
+                                                                          color: Color(
+                                                                              0xFFE5E7EB),
+                                                                          letterSpacing:
+                                                                              0.0,
                                                                           fontWeight: FlutterFlowTheme.of(
                                                                                   context)
                                                                               .bodySmall
@@ -606,23 +624,13 @@ class _VaultWidgetState extends State<VaultWidget>
                                                                               .bodySmall
                                                                               .fontStyle,
                                                                         ),
-                                                                        color: Color(
-                                                                            0xFFE5E7EB),
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodySmall
-                                                                            .fontWeight,
-                                                                        fontStyle: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodySmall
-                                                                            .fontStyle,
-                                                                      ),
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
+                                                          SizedBox.square(dimension: 5.0,),
+                                                          // ------------------------------Pass BUttons ----------------------------
                                                           Row(
                                                             mainAxisSize:
                                                                 MainAxisSize.max,
@@ -749,7 +757,7 @@ class _VaultWidgetState extends State<VaultWidget>
                                                     alignment: AlignmentDirectional(
                                                       0.0, 0.0),
                                                     child: Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 16.0, 0.0),
+                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                                                     child: Container(
                                                       width: MediaQuery.sizeOf(context).width *0.4,
                                                       height: MediaQuery.sizeOf(context).height *0.07,
@@ -1015,21 +1023,36 @@ class _VaultWidgetState extends State<VaultWidget>
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize.max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text( // .................................................... NEWSLETTER NAME ................................
-                                                                item['newsletter_name'],
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleMedium
-                                                                    .override(
-                                                                      font: GoogleFonts
-                                                                          .interTight(
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize.max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text( // .................................................... NEWSLETTER NAME ................................
+                                                                  item['newsletter_name'],
+                                                                  maxLines: 1,
+                                                                  overflow: TextOverflow.ellipsis,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMedium
+                                                                      .override(
+                                                                        font: GoogleFonts
+                                                                            .interTight(
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w600,
+                                                                          fontStyle: FlutterFlowTheme.of(
+                                                                                  context)
+                                                                              .titleMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                        color: Color(
+                                                                            0xFFE5E7EB),
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                         fontWeight:
                                                                             FontWeight
                                                                                 .w600,
@@ -1038,90 +1061,82 @@ class _VaultWidgetState extends State<VaultWidget>
                                                                             .titleMedium
                                                                             .fontStyle,
                                                                       ),
-                                                                      color: Color(
-                                                                          0xFFE5E7EB),
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleMedium
-                                                                          .fontStyle,
-                                                                    ),
-                                                              ),
-                                                              Text('${item['frequency'] ?? 'Not defined'}',
-                                                                style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .override(
-                                                                        font: GoogleFonts
-                                                                            .inter(
-                                                                          fontWeight: FlutterFlowTheme.of(
-                                                                                  context)
-                                                                              .bodySmall
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(
-                                                                                  context)
-                                                                              .bodySmall
-                                                                              .fontStyle,
-                                                                        ),
-                                                                        color: Color(
-                                                                            0xFFE5E7EB),
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodySmall
-                                                                            .fontWeight,
-                                                                        fontStyle: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodySmall
-                                                                            .fontStyle,
-                                                                      ),
-                                                              ),
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        4.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                                child: Text( // ............................................................ EMAIL ................................
-                                                                  item['email'],
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .override(
-                                                                        font: GoogleFonts
-                                                                            .inter(
-                                                                          fontWeight: FlutterFlowTheme.of(
-                                                                                  context)
-                                                                              .bodySmall
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(
-                                                                                  context)
-                                                                              .bodySmall
-                                                                              .fontStyle,
-                                                                        ),
-                                                                        color: Color(
-                                                                            0xFFE5E7EB),
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodySmall
-                                                                            .fontWeight,
-                                                                        fontStyle: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .bodySmall
-                                                                            .fontStyle,
-                                                                      ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                                Text('${item['frequency'] ?? 'Not defined'}',
+                                                                  style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .override(
+                                                                          font: GoogleFonts
+                                                                              .inter(
+                                                                            fontWeight: FlutterFlowTheme.of(
+                                                                                    context)
+                                                                                .bodySmall
+                                                                                .fontWeight,
+                                                                            fontStyle: FlutterFlowTheme.of(
+                                                                                    context)
+                                                                                .bodySmall
+                                                                                .fontStyle,
+                                                                          ),
+                                                                          color: Color(
+                                                                              0xFFE5E7EB),
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight: FlutterFlowTheme.of(
+                                                                                  context)
+                                                                              .bodySmall
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(
+                                                                                  context)
+                                                                              .bodySmall
+                                                                              .fontStyle,
+                                                                        ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text( // ............................................................ EMAIL ................................
+                                                                    item['email'],
+                                                                    maxLines: 1,
+                                                                    overflow: TextOverflow.ellipsis,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .override(
+                                                                          font: GoogleFonts
+                                                                              .inter(
+                                                                            fontWeight: FlutterFlowTheme.of(
+                                                                                    context)
+                                                                                .bodySmall
+                                                                                .fontWeight,
+                                                                            fontStyle: FlutterFlowTheme.of(
+                                                                                    context)
+                                                                                .bodySmall
+                                                                                .fontStyle,
+                                                                          ),
+                                                                          color: Color(
+                                                                              0xFFE5E7EB),
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight: FlutterFlowTheme.of(
+                                                                                  context)
+                                                                              .bodySmall
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(
+                                                                                  context)
+                                                                              .bodySmall
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
+                                                          SizedBox.square(dimension: 5.0,),
                                                           Row( // -------------------------------------------------------- SUB BUTTONS ----------------------------------------------
                                                             mainAxisSize:
                                                                 MainAxisSize.max,

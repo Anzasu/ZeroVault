@@ -113,6 +113,26 @@ flutter:
     - assets/pdfs/
     - assets/jsons/
 
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
+    - family: InterTight
+      fonts:
+        - asset: assets/fonts/InterTight-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/InterTight-SemiBold.ttf
+          weight: 600
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+
 flutter_launcher_icons:
    android: true
    ios: true
